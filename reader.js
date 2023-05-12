@@ -46,4 +46,5 @@ if ('NDEFReader' in window) {
   }
 } else {
   console.log("NFC not supported by the browser");
+   alert("NFC not supported by the browser");
 }
