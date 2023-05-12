@@ -1,4 +1,4 @@
-if ('NDEFReader' in window) {
+  if ('NDEFReader' in window) {
   const reader = new NDEFReader();
   
   // Handle errors
