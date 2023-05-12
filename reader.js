@@ -21,9 +21,24 @@
     if (differenceInSeconds <= 10) {
       alert("Food is fresh!");
     } else {
-      alert("Food is not fresh!");
+      alert("Food is fresh!");
     }
   };
+  
+   // Check for inactivity
+  let timeoutId;
+  function startTimer() {
+    timeoutId = setTimeout(() => {
+      alert("Food is not fresh!");
+    }, 10000); // 10 seconds
+  }
+
+  function resetTimer() {
+    clearTimeout(timeoutId);
+    startTimer();
+  }
+
+  startTimer();
   
   // Start scanning when the button is clicked
   const scanButton = document.getElementById('scan-button');
