@@ -1,6 +1,5 @@
 if ('NDEFReader' in window) {
   const reader = new NDEFReader();
-  let timer;
   
   // Handle errors
   reader.onerror = (event) => {
@@ -11,8 +10,18 @@ if ('NDEFReader' in window) {
   reader.onreading = (event) => {
     console.log(event.message);
     
-    alert("Food is fresh!");
-    resetTimer();
+    // Extract data from the message and determine if the food is fresh or not
+    const data = event.message.records[0].data;
+    const dateString = new TextDecoder().decode(data);
+    const expirationDate = new Date(dateString);
+    const currentTime = new Date();
+    const differenceInSeconds = (expirationDate - currentTime) / 1000;
+    
+    if (differenceInSeconds <= 10) {
+      alert("Food is fresh!");
+    } else {
+      alert("Food is fresh!");
+    }
   };
   
   // Start scanning when the button is clicked
@@ -20,7 +29,6 @@ if ('NDEFReader' in window) {
   scanButton.addEventListener('click', async () => {
     try {
       await reader.scan();
-      resetTimer();
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +44,7 @@ if ('NDEFReader' in window) {
   // Timer functions
   function startTimer() {
     timer = setTimeout(() => {
-      alert("Food is Not fresh!");
+      alert("Page is inactive!");
     }, 5000);
   }
   
@@ -44,7 +52,10 @@ if ('NDEFReader' in window) {
     clearTimeout(timer);
     startTimer();
   }
+  
 } else {
   console.log("NFC not supported by the browser");
-   alert("NFC not supported by the browser");
+  alert("NFC not supported by the browser");
 }
+
+
