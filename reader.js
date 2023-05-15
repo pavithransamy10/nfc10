@@ -44,7 +44,7 @@ if ('NDEFReader' in window) {
   // Timer functions
   function startTimer() {
     timer = setTimeout(() => {
-      alert("Page is inactive!");
+      alert("Food is Not Fresh");
     }, 5000);
   }
   
